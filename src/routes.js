@@ -1,7 +1,5 @@
 import { Router } from "express"
 
-const [app, d] = routes
-
 const routes = new Router()
 
 routes.get("/", (request, response) =>
