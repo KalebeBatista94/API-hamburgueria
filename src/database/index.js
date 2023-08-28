@@ -1,3 +1,18 @@
-const app = require("express")
+import { Sequelize } from "sequelize"
+import User from "../app/models/User"
 
-console.log(app)
+import configDatabase from "../config/database"
+
+const models = [User]
+class Database {
+  constructor() {
+    this.init()
+  }
+
+  init() {
+    this.conection = new Sequelize(configDatabase)
+    models.map((model) => model.init(this.conection))
+  }
+}
+
+export default new Database()
