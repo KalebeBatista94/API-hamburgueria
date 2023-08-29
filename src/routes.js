@@ -10,7 +10,7 @@ routes.get("/", async (request, response) => {
     name: "Kalebe",
     email: "kalebeDev@gmail.com",
     password_hash: "123AhudS12",
-    admin: true,
+    admin: false,
   })
   return response.json(user)
 })
