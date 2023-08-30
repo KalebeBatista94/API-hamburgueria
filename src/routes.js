@@ -7,10 +7,10 @@ const routes = new Router()
 routes.get("/", async (request, response) => {
   const user = await User.create({
     id: v4(),
-    name: "Kalebe",
-    email: "kalebeDev@gmail.com",
+    name: "Kalebe baptist",
+    email: "kalebe.Dev@gmail.com",
     password_hash: "123AhudS12",
-    admin: false,
+    admin: true,
   })
   return response.json(user)
 })
