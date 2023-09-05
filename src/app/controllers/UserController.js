@@ -1,9 +1,20 @@
 import { v4 } from "uuid"
+import * as Yup from "yup"
 import User from "../models/User"
 
 class UserController {
   // eslint-disable-next-line class-methods-use-this
   async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password_hash: Yup.string().required().min(6),
+      admin: Yup.boolean(),
+    })
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json("Make sure your data is correct")
+    }
     // eslint-disable-next-line camelcase
     const { name, email, password_hash, admin } = req.body
 
@@ -16,7 +27,7 @@ class UserController {
       admin,
     })
 
-    return res.json(user)
+    return res.status(201).json({ id: user.id, name, email, admin })
   }
 }
 
